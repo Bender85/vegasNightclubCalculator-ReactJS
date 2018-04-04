@@ -5,10 +5,15 @@ import data from '../../clubs.json';
 
 
 class SelectClub extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.state = { value: '' };
     // this.state = {items: []}
   }
+  handleChange = (e) => {
+    let val = e.target.value;
+    this.setState({ value: val });
+  };
   // componentWillMount() {
   //   fetch('http://www.softomate.net/ext/employees/list.json')
   //     .then(response => response.json())
@@ -16,19 +21,20 @@ class SelectClub extends Component {
   // }
 
   render() {
-    // let items = this.state.items;
-    // console.log(items);
+    let items = this.state.value;
+    console.log(items);
+    let _data = [];
     for(let i = 0; i < data.length; i++) {
-      console.log(data[i]);
+      _data.push(data[i].club)
     }
     return (
-      <ul>
+      <select name="" id="" value={this.state.value} onChange={this.handleChange}>
         {
-          data.map(function(movie){
-            return <li key={movie.id}>{movie.id} - {movie.title}</li>;
+          _data[0].map(function(item, i){
+            return <option key={i} value={item.name}>{item.name}</option>;
           })
         }
-      </ul>
+      </select>
     );
   }
 }
